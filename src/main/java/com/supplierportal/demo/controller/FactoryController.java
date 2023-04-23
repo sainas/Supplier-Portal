@@ -4,6 +4,7 @@ import com.supplierportal.demo.model.Enterprise;
 import com.supplierportal.demo.model.Factory;
 import com.supplierportal.demo.repository.EnterpriseRepository;
 import com.supplierportal.demo.repository.FactoryRepository;
+import com.supplierportal.demo.request.NewFactoryRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +14,7 @@ import java.util.Optional;
 @RestController
 public class FactoryController {
 
-    private FactoryRepository factoryRepository;
-    private EnterpriseController enterpriseController;
+    private final FactoryRepository factoryRepository;
     private final EnterpriseRepository enterpriseRepository;
 
     public FactoryController(FactoryRepository factoryRepository,
@@ -36,14 +36,21 @@ public class FactoryController {
 
     @PostMapping("/enterprise/{enterpriseId}/factory")
     private ResponseEntity<String> createFactory(
-            @PathVariable Integer enterpriseId, @RequestBody Factory newFactoryRequest) {
+            @PathVariable Integer enterpriseId, @RequestBody Factory newFactory) {
         Optional<Enterprise> enterprise = enterpriseRepository.findById(enterpriseId);
         if (enterprise.isPresent()) {
-            newFactoryRequest.setEnterprise(enterprise.get());
-            Factory savedfactory = factoryRepository.save(newFactoryRequest);
-            return ResponseEntity.ok(savedfactory.toString() + "123123");
+            newFactory.setEnterprise(enterprise.get());
+            factoryRepository.save(newFactory);
+            return ResponseEntity.ok(
+                    String.format(
+                            "Factory created successfully with id %d for enterprise %d",
+                            newFactory.getId(),
+                            enterpriseId)
+            );
         } else {
-            return ResponseEntity.notFound().build();
+            return ResponseEntity.badRequest().body(
+                    String.format("Enterprise with id %d not found", enterpriseId)
+            );
         }
     }
 

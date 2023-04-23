@@ -20,8 +20,8 @@ SET row_security = off;
 -- Data for Name: enterprise; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.enterprise VALUES (1, 'Enterprise B');
-INSERT INTO public.enterprise VALUES (2, 'Enterprise A');
+INSERT INTO public.enterprise VALUES (1, 'Enterprise A');
+INSERT INTO public.enterprise VALUES (2, 'Enterprise B');
 
 
 --

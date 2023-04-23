@@ -3,6 +3,8 @@ package com.supplierportal.demo.controller;
 import com.supplierportal.demo.model.Enterprise;
 import com.supplierportal.demo.model.Factory;
 import com.supplierportal.demo.repository.EnterpriseRepository;
+import com.supplierportal.demo.request.NewEnterpriseRequest;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +15,7 @@ import java.util.Optional;
 @RequestMapping("/enterprise")
 public class EnterpriseController {
 
-    private EnterpriseRepository enterpriseRepository;
+    private final EnterpriseRepository enterpriseRepository;
 
     public EnterpriseController(EnterpriseRepository enterpriseRepository) {
         this.enterpriseRepository = enterpriseRepository;
@@ -30,9 +32,11 @@ public class EnterpriseController {
     }
 
     @PostMapping
-    private ResponseEntity<Enterprise> createEnterprise(
-            @RequestBody Enterprise newEnterpriseRequest) {
-        Enterprise savedEnterprise = enterpriseRepository.save(newEnterpriseRequest);
-        return ResponseEntity.ok(savedEnterprise);
+    private ResponseEntity<String> createEnterprise(
+            @RequestBody Enterprise newEnterprise) {
+        Enterprise savedNewEnterprise = enterpriseRepository.save(newEnterprise);
+        return ResponseEntity.ok(
+                String.format("Enterprise created successfully with id %d", savedNewEnterprise.getId())
+        );
     }
 }
