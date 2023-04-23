@@ -16,7 +16,8 @@ import java.util.Objects;
 @AllArgsConstructor
 public class Factory {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "factory_id_seq")
+    @SequenceGenerator(name = "factory_id_seq", sequenceName = "factory_id_seq", allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Integer id;
 

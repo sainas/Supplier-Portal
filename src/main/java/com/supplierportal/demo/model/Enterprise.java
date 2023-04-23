@@ -18,7 +18,8 @@ import java.util.Set;
 @AllArgsConstructor
 public class Enterprise {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "enterprise_id_seq")
+    @SequenceGenerator(name = "enterprise_id_seq", sequenceName = "enterprise_id_seq", allocationSize = 1)
     @Column(name = "id", nullable = false)
     private Integer id;
 
