@@ -54,6 +54,99 @@ CREATE TABLE public.enterprise (
 
 
 --
+-- Name: enterprise_keyprocess_equipment; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.enterprise_keyprocess_equipment (
+    enterprise_id integer NOT NULL,
+    product_step_keyprocess_id integer NOT NULL,
+    equipment_id integer NOT NULL,
+    capacity_per_hour double precision,
+    quantity integer,
+    purchase_cycle integer
+);
+
+
+--
+-- Name: equipment; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.equipment (
+    id integer NOT NULL,
+    name character varying NOT NULL
+);
+
+
+--
+-- Name: process; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.process (
+    id integer NOT NULL,
+    name character varying NOT NULL
+);
+
+
+--
+-- Name: product; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.product (
+    id integer NOT NULL,
+    name character varying NOT NULL
+);
+
+
+--
+-- Name: product_step; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.product_step (
+    id integer NOT NULL,
+    product_id integer,
+    step_number integer,
+    name character varying NOT NULL
+);
+
+
+--
+-- Name: product_step_keyprocess; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.product_step_keyprocess (
+    id integer NOT NULL,
+    product_step_id integer,
+    keyprocess_id integer,
+    is_bottleneck boolean
+);
+
+
+--
+-- Name: enterprise_equipment_details; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.enterprise_equipment_details AS
+ SELECT enterprise.id AS "企业ID",
+    enterprise.name AS "企业名称",
+    product.name AS "产品名称",
+    ps.step_number AS "步骤序号",
+    ps.name AS "步骤名称",
+    process.name AS "工艺名称",
+    psk.is_bottleneck AS "是否瓶颈",
+    equipment.name AS "设备名称",
+    eke.quantity AS "设备数量",
+    eke.capacity_per_hour AS "设备每小时产能"
+   FROM ((((((public.enterprise_keyprocess_equipment eke
+     JOIN public.product_step_keyprocess psk ON ((eke.product_step_keyprocess_id = psk.id)))
+     JOIN public.product_step ps ON ((psk.product_step_id = ps.id)))
+     JOIN public.product product ON ((ps.product_id = product.id)))
+     JOIN public.process ON ((psk.keyprocess_id = process.id)))
+     JOIN public.enterprise ON ((eke.enterprise_id = enterprise.id)))
+     JOIN public.equipment ON ((eke.equipment_id = equipment.id)))
+  ORDER BY enterprise.id, product.id, ps.step_number, process.name, equipment.name;
+
+
+--
 -- Name: enterprise_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -74,20 +167,6 @@ ALTER SEQUENCE public.enterprise_id_seq OWNED BY public.enterprise.id;
 
 
 --
--- Name: enterprise_keyprocess_equipment; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.enterprise_keyprocess_equipment (
-    enterprise_id integer NOT NULL,
-    product_step_keyprocess_id integer NOT NULL,
-    equipment_id integer NOT NULL,
-    capacity_per_hour double precision,
-    quantity integer,
-    purchase_cycle integer
-);
-
-
---
 -- Name: enterprise_product_volume; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -98,16 +177,6 @@ CREATE TABLE public.enterprise_product_volume (
     planned integer,
     occupied integer,
     last_update date
-);
-
-
---
--- Name: equipment; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.equipment (
-    id integer NOT NULL,
-    name character varying NOT NULL
 );
 
 
@@ -163,16 +232,6 @@ ALTER SEQUENCE public.factory_id_seq OWNED BY public.factory.id;
 
 
 --
--- Name: process; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.process (
-    id integer NOT NULL,
-    name character varying NOT NULL
-);
-
-
---
 -- Name: process_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
@@ -190,16 +249,6 @@ CREATE SEQUENCE public.process_id_seq
 --
 
 ALTER SEQUENCE public.process_id_seq OWNED BY public.process.id;
-
-
---
--- Name: product; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.product (
-    id integer NOT NULL,
-    name character varying NOT NULL
-);
 
 
 --
@@ -223,15 +272,21 @@ ALTER SEQUENCE public.product_id_seq OWNED BY public.product.id;
 
 
 --
--- Name: product_step; Type: TABLE; Schema: public; Owner: -
+-- Name: product_process_details; Type: VIEW; Schema: public; Owner: -
 --
 
-CREATE TABLE public.product_step (
-    id integer NOT NULL,
-    product_id integer,
-    step_number integer,
-    name character varying NOT NULL
-);
+CREATE VIEW public.product_process_details AS
+ SELECT psk.id AS "产品工艺ID",
+    product.name AS "产品名称",
+    ps.step_number AS "步骤序号",
+    ps.name AS "步骤名称",
+    process.name AS "工艺名称",
+    psk.is_bottleneck AS "是否瓶颈"
+   FROM (((public.product_step_keyprocess psk
+     JOIN public.product_step ps ON ((psk.product_step_id = ps.id)))
+     JOIN public.product product ON ((ps.product_id = product.id)))
+     JOIN public.process ON ((psk.keyprocess_id = process.id)))
+  ORDER BY product.id, ps.step_number, process.name;
 
 
 --
@@ -252,18 +307,6 @@ CREATE SEQUENCE public.product_step_id_seq
 --
 
 ALTER SEQUENCE public.product_step_id_seq OWNED BY public.product_step.id;
-
-
---
--- Name: product_step_keyprocess; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.product_step_keyprocess (
-    id integer NOT NULL,
-    product_step_id integer,
-    keyprocess_id integer,
-    is_bottleneck boolean
-);
 
 
 --

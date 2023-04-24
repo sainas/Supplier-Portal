@@ -69,6 +69,9 @@ INSERT INTO public.process VALUES (6, '引导板');
 --
 
 INSERT INTO public.product VALUES (1, '充电桩');
+INSERT INTO public.product VALUES (2, '充电枪');
+INSERT INTO public.product VALUES (3, '移动充电车');
+INSERT INTO public.product VALUES (4, '换电站本体');
 
 
 --
@@ -112,6 +115,10 @@ INSERT INTO public.enterprise_keyprocess_equipment VALUES (2, 6, 7, 7, 10, 1);
 -- Data for Name: enterprise_product_volume; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.enterprise_product_volume VALUES (1, 3, 2023, 2000, 0, '2023-04-23');
+INSERT INTO public.enterprise_product_volume VALUES (2, 3, 2023, 8000, 0, '2023-04-23');
+INSERT INTO public.enterprise_product_volume VALUES (2, 4, 2023, 900, 0, '2023-04-23');
+INSERT INTO public.enterprise_product_volume VALUES (1, 2, 2023, 70000, 0, '2023-04-23');
 
 
 --
