@@ -20,28 +20,22 @@ SET row_security = off;
 -- Data for Name: enterprise; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.enterprise VALUES (1, 'Enterprise A');
-INSERT INTO public.enterprise VALUES (2, 'Enterprise B');
-
-
---
--- Data for Name: factory; Type: TABLE DATA; Schema: public; Owner: -
---
-
-INSERT INTO public.factory VALUES (2, 1, '工厂A2');
-INSERT INTO public.factory VALUES (3, 1, '工厂A3');
-INSERT INTO public.factory VALUES (4, 2, '工厂B1');
-INSERT INTO public.factory VALUES (5, 2, '工厂B2');
-INSERT INTO public.factory VALUES (6, 2, '工厂B3');
-INSERT INTO public.factory VALUES (7, 2, '工厂B4');
-INSERT INTO public.factory VALUES (8, 2, '工厂B5');
-INSERT INTO public.factory VALUES (1, 1, '工厂A1');
+INSERT INTO public.enterprise VALUES (1, '企业 A');
+INSERT INTO public.enterprise VALUES (2, '企业 B');
 
 
 --
 -- Data for Name: employee; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.employee VALUES (1, '产品研发', 200);
+INSERT INTO public.employee VALUES (1, '工艺研发', 100);
+INSERT INTO public.employee VALUES (1, '制造', 2000);
+INSERT INTO public.employee VALUES (1, '其他', 2100);
+INSERT INTO public.employee VALUES (2, '产品研发', 1000);
+INSERT INTO public.employee VALUES (2, '工艺研发', 500);
+INSERT INTO public.employee VALUES (2, '制造', 7000);
+INSERT INTO public.employee VALUES (2, '其他', 1500);
 
 
 --
@@ -121,6 +115,20 @@ INSERT INTO public.enterprise_keyprocess_equipment VALUES (2, 6, 7, 7, 10, 1);
 
 
 --
+-- Data for Name: factory; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+INSERT INTO public.factory VALUES (2, 1, '工厂A2');
+INSERT INTO public.factory VALUES (3, 1, '工厂A3');
+INSERT INTO public.factory VALUES (4, 2, '工厂B1');
+INSERT INTO public.factory VALUES (5, 2, '工厂B2');
+INSERT INTO public.factory VALUES (6, 2, '工厂B3');
+INSERT INTO public.factory VALUES (7, 2, '工厂B4');
+INSERT INTO public.factory VALUES (8, 2, '工厂B5');
+INSERT INTO public.factory VALUES (1, 1, '工厂A1');
+
+
+--
 -- Data for Name: factory_product; Type: TABLE DATA; Schema: public; Owner: -
 --
 
@@ -144,7 +152,7 @@ SELECT pg_catalog.setval('public.equipment_id_seq', 8, true);
 -- Name: factory_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.factory_id_seq', 1, true);
+SELECT pg_catalog.setval('public.factory_id_seq', 8, true);
 
 
 --

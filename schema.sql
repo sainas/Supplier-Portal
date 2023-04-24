@@ -37,7 +37,7 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.employee (
-    factory_id integer NOT NULL,
+    enterprise_id integer NOT NULL,
     employee_type public.employee_type_enum NOT NULL,
     number integer
 );
@@ -350,7 +350,7 @@ ALTER TABLE ONLY public.product_step_keyprocess ALTER COLUMN id SET DEFAULT next
 --
 
 ALTER TABLE ONLY public.employee
-    ADD CONSTRAINT employee_pkey PRIMARY KEY (factory_id, employee_type);
+    ADD CONSTRAINT employee_pkey PRIMARY KEY (enterprise_id, employee_type);
 
 
 --
@@ -450,11 +450,11 @@ ALTER TABLE ONLY public.product_step
 
 
 --
--- Name: employee employee_factory_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: employee employee_enterprise_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.employee
-    ADD CONSTRAINT employee_factory_id_fkey FOREIGN KEY (factory_id) REFERENCES public.factory(id);
+    ADD CONSTRAINT employee_enterprise_id_fkey FOREIGN KEY (enterprise_id) REFERENCES public.enterprise(id);
 
 
 --
