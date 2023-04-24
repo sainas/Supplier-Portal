@@ -11,8 +11,6 @@ drop table if exists "product_step_keyprocess" cascade;
 drop table if exists "process" cascade;
 drop table if exists "enterprise_keyprocess_equipment" cascade;
 
-DROP TYPE IF EXISTS employee_type_enum;
-
 CREATE TABLE enterprise (
 	id SERIAL PRIMARY KEY,
 	name varchar NOT NULL
@@ -75,13 +73,10 @@ CREATE TABLE enterprise_keyprocess_equipment (
     PRIMARY KEY (enterprise_id, product_step_keyprocess_id, equipment_id)
 );
 
-CREATE TYPE employee_type_enum AS ENUM (
-		'产品研发', '工艺研发', '制造', '其他'
-);
 
 CREATE TABLE employee (
     enterprise_id INTEGER REFERENCES enterprise(id),
-    employee_type	employee_type_enum,
+    employee_type varchar NOT NULL,
     number int,
     PRIMARY KEY (enterprise_id, employee_type)
 );

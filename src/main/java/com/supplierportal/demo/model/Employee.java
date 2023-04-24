@@ -6,28 +6,29 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
+@Entity
+@Table(name = "employee", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {
+                "enterprise_id", "employee_type" })
+})
 @Getter
 @Setter
-@Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "employee")
+@IdClass(EmployeeId.class)
 public class Employee {
 
-    @EmbeddedId
-    private EmployeeId id;
-
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "enterprise_id", nullable = false)
-    @MapsId("enterpriseId")
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "enterprise_id")
     private Enterprise enterprise;
 
+    @Id
     @Column(name = "employee_type")
-    @Enumerated(EnumType.STRING)
-    @MapsId("employeeType")
-    private EmployeeType employeeType;
-
+    private String employeeType;
 
     @Column(name = "number")
     private Integer number;
+
 }
