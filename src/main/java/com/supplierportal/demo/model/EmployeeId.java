@@ -17,6 +17,6 @@ import java.io.Serializable;
 public class EmployeeId implements Serializable {
 
     private Enterprise enterprise;
-    private String employeeType;
+    private EmployeeType employeeType;
 
 }

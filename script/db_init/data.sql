@@ -28,14 +28,14 @@ INSERT INTO public.enterprise VALUES (2, '企业 B');
 -- Data for Name: employee; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.employee VALUES (1, '产品研发', 200);
-INSERT INTO public.employee VALUES (1, '工艺研发', 100);
-INSERT INTO public.employee VALUES (1, '制造', 2000);
-INSERT INTO public.employee VALUES (1, '其他', 2100);
-INSERT INTO public.employee VALUES (2, '产品研发', 1000);
-INSERT INTO public.employee VALUES (2, '工艺研发', 500);
-INSERT INTO public.employee VALUES (2, '制造', 7000);
-INSERT INTO public.employee VALUES (2, '其他', 1500);
+INSERT INTO public.employee VALUES (1, 'PRODUCT_DEVELOPMENT', 200);
+INSERT INTO public.employee VALUES (1, 'PROCESS_DEVELOPMENT', 100);
+INSERT INTO public.employee VALUES (1, 'MANUFACTURING', 2000);
+INSERT INTO public.employee VALUES (1, 'OTHER', 2100);
+INSERT INTO public.employee VALUES (2, 'PRODUCT_DEVELOPMENT', 1000);
+INSERT INTO public.employee VALUES (2, 'PROCESS_DEVELOPMENT', 500);
+INSERT INTO public.employee VALUES (2, 'MANUFACTURING', 7000);
+INSERT INTO public.employee VALUES (2, 'OTHER', 1500);
 
 
 --

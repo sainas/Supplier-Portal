@@ -1,5 +1,6 @@
 package com.supplierportal.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,11 +23,13 @@ public class Employee {
     @Id
     @ManyToOne
     @JoinColumn(name = "enterprise_id")
+    @JsonIgnore
     private Enterprise enterprise;
 
     @Id
+    @Enumerated(EnumType.STRING)
     @Column(name = "employee_type")
-    private String employeeType;
+    private EmployeeType employeeType;
 
     @Column(name = "number")
     private Integer number;
