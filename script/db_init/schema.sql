@@ -16,17 +16,6 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
---
--- Name: employee_type_enum; Type: TYPE; Schema: public; Owner: -
---
-
-CREATE TYPE public.employee_type_enum AS ENUM (
-    '产品研发',
-    '工艺研发',
-    '制造',
-    '其他'
-);
-
 
 SET default_tablespace = '';
 
@@ -38,7 +27,7 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.employee (
     enterprise_id integer NOT NULL,
-    employee_type public.employee_type_enum NOT NULL,
+    employee_type character varying NOT NULL,
     number integer
 );
 
