@@ -4,6 +4,7 @@ import com.supplierportal.demo.model.Enterprise;
 import com.supplierportal.demo.model.Factory;
 import com.supplierportal.demo.repository.EnterpriseRepository;
 import com.supplierportal.demo.repository.FactoryRepository;
+import com.supplierportal.demo.request.NewFactoryRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,10 +34,12 @@ public class FactoryController {
 
     @PostMapping("/enterprise/{enterpriseId}/factory")
     private ResponseEntity<String> createFactory(
-            @PathVariable Integer enterpriseId, @RequestBody Factory newFactory) {
+            @PathVariable Integer enterpriseId, @RequestBody NewFactoryRequest newFactoryRequest) {
         Optional<Enterprise> enterprise = enterpriseRepository.findById(enterpriseId);
         if (enterprise.isPresent()) {
+            Factory newFactory = new Factory();
             newFactory.setEnterprise(enterprise.get());
+            newFactory.setName(newFactoryRequest.getName());
             factoryRepository.save(newFactory);
             return ResponseEntity.ok(
                     String.format(

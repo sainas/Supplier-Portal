@@ -41,7 +41,7 @@ class DemoApplicationTests {
         Optional<Enterprise> e = enterpriseRepository.findById(1);
         System.out.println(e);
         NewFactoryRequest newFactory = new NewFactoryRequest(
-                1, "Test Create Factory 1"
+                "Test Create Factory 1"
         );
 //		ResponseEntity<String> createResponse = restTemplate.postForEntity(
 //				"/enterprise/1/factory", newFactory, String.class);

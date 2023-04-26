@@ -1,16 +1,14 @@
 package com.supplierportal.demo.request;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-
-@Value
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class NewEnterpriseRequest {
-//    @NotBlank
-//    String name;
-//
-//    NewEnterpriseRequest() {}
-//
-//    NewEnterpriseRequest(String name) {
-//        this.name = name;
-//    }
+    private String name;
 }
