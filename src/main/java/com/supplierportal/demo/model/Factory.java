@@ -1,9 +1,12 @@
 package com.supplierportal.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
@@ -13,6 +16,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "factory")
 @NoArgsConstructor
+@Getter
+@Setter
 @AllArgsConstructor
 public class Factory {
     @Id
@@ -21,40 +26,17 @@ public class Factory {
     @Column(name = "id", nullable = false)
     private Integer id;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "enterprise_id")
-    @JsonIgnore
+    @JoinColumn(name = "enterprise_id", nullable = false)
     private Enterprise enterprise;
 
     @Column(name = "name")
     private String name;
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
+    public Factory(String name, Enterprise enterprise) {
         this.name = name;
-    }
-
-    public Enterprise getEnterprise() {
-        return enterprise;
-    }
-
-    public void setEnterprise(Enterprise enterprise) {
         this.enterprise = enterprise;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Factory(String name) {
-        this.name = name;
     }
 
     @Override

@@ -1,5 +1,6 @@
+SET schema 'public';
+
 drop table if exists "factory" cascade;
-drop table if exists "factory_product" cascade;
 drop table if exists "product" cascade;
 drop table if exists "enterprise_product_volume" cascade;
 drop table if exists "product_step" cascade;
@@ -9,8 +10,6 @@ drop table if exists "employee" cascade;
 drop table if exists "product_step_keyprocess" cascade;
 drop table if exists "process" cascade;
 drop table if exists "enterprise_keyprocess_equipment" cascade;
-
-DROP TYPE IF EXISTS employee_type_enum;
 
 CREATE TABLE enterprise (
 	id SERIAL PRIMARY KEY,
@@ -26,12 +25,6 @@ CREATE TABLE factory (
 CREATE TABLE product (
 	id SERIAL PRIMARY KEY,
 	name varchar NOT NULL
-);
-
-CREATE TABLE factory_product (
-	factory_id INTEGER REFERENCES factory(id),
-	product_id INTEGER REFERENCES product(id),
-  PRIMARY KEY (factory_id, product_id)
 );
 
 CREATE TABLE enterprise_product_volume (
@@ -80,16 +73,10 @@ CREATE TABLE enterprise_keyprocess_equipment (
     PRIMARY KEY (enterprise_id, product_step_keyprocess_id, equipment_id)
 );
 
-CREATE TYPE employee_type_enum AS ENUM (
-		'product_development',
-		'process_development',
-		'management',
-		'manufacturing'
-);
 
 CREATE TABLE employee (
     enterprise_id INTEGER REFERENCES enterprise(id),
-    employee_type	employee_type_enum,
+    employee_type varchar NOT NULL,
     number int,
     PRIMARY KEY (enterprise_id, employee_type)
 );

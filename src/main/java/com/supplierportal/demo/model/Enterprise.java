@@ -1,14 +1,11 @@
 package com.supplierportal.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.hibernate.Hibernate;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.type.SqlTypes;
+import lombok.*;
+import lombok.extern.jackson.Jacksonized;
 
 import java.util.LinkedHashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -16,6 +13,8 @@ import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class Enterprise {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "enterprise_id_seq")
@@ -26,33 +25,9 @@ public class Enterprise {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "enterprise", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    @OneToMany(mappedBy = "enterprise", cascade = CascadeType.ALL)
     private Set<Factory> factories = new LinkedHashSet<>();
-
-    public Set<Factory> getFactories() {
-        return factories;
-    }
-
-    public void setFactories(Set<Factory> factories) {
-        this.factories = factories;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
 
     public Enterprise(Integer id, String name) {
         this.id = id;
