@@ -23,10 +23,7 @@ class ProductStepKeyprocessRepositoryTest {
 
     @Test
     public void testGetProductStepKeyprocess() {
-        System.out.println(1);
         List<Tuple> results = enterpriseKeyprocessEquipmentRepository.findEnterpriseIdAndProductStepIdByProductIdAndIsBottleneckIsTrue(1);
-        System.out.println(1);
-        System.out.println(1);
         System.out.println(results);
 
 
