@@ -3,17 +3,15 @@ package com.supplierportal.demo.model;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.Hibernate;
 
 import java.util.LinkedHashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "product_step", uniqueConstraints = {
-        @UniqueConstraint(columnNames = { "product_id", "step_number" })
+        @UniqueConstraint(columnNames = {"product_id", "step_number"})
 })
 public class ProductStep {
     @Id

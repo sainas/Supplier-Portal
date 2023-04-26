@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface EnterpriseProductVolumeRepository extends CrudRepository<EnterpriseProductVolume, EmployeeId> {
 
-    public List<EnterpriseProductVolume> findAllByEnterprise(Enterprise enterprise);
+    List<EnterpriseProductVolume> findAllByEnterprise(Enterprise enterprise);
 
-    public List<EnterpriseProductVolume> findAllByEnterpriseAndYear(Enterprise enterprise, Integer year);
+    List<EnterpriseProductVolume> findAllByEnterpriseAndYear(Enterprise enterprise, Integer year);
 }

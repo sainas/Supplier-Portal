@@ -1,14 +1,10 @@
 package com.supplierportal.demo.controller;
 
 import com.supplierportal.demo.model.Enterprise;
-import com.supplierportal.demo.model.Factory;
 import com.supplierportal.demo.repository.EnterpriseRepository;
-import com.supplierportal.demo.request.NewEnterpriseRequest;
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController

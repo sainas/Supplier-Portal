@@ -13,7 +13,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "enterprise_keyprocess_equipment", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
-                "enterprise_id", "product_step_keyprocess_id", "equipment_id" })
+                "enterprise_id", "product_step_keyprocess_id", "equipment_id"})
 })
 
 public class EnterpriseKeyprocessEquipment {

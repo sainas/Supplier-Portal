@@ -7,8 +7,6 @@ import org.springframework.boot.test.json.JacksonTester;
 
 import java.io.IOException;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 @JsonTest
 public class EnterpriseJsonTest {
 

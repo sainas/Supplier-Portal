@@ -3,11 +3,9 @@ package com.supplierportal.demo.controller;
 import com.supplierportal.demo.model.Employee;
 import com.supplierportal.demo.model.EmployeeType;
 import com.supplierportal.demo.model.Enterprise;
-import com.supplierportal.demo.model.EnterpriseKeyprocessEquipment;
 import com.supplierportal.demo.repository.EmployeeRepository;
 import com.supplierportal.demo.repository.EnterpriseRepository;
 import com.supplierportal.demo.request.NewEmployeeRequest;
-import com.supplierportal.demo.request.NewKeyprocessEquipmentRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

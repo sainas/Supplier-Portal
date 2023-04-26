@@ -2,14 +2,19 @@ package com.supplierportal.demo.controller;
 
 import com.supplierportal.demo.model.*;
 import com.supplierportal.demo.repository.*;
-import org.apache.poi.ss.usermodel.*;
+import jakarta.persistence.Tuple;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import jakarta.persistence.Tuple;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -50,8 +55,8 @@ public class ReportController {
         Product product = productOptional.get();
 
         List<ProductStepKeyprocess> productStepKeyprocesses = new ArrayList<>();
-        for (ProductStep ps: product.getProductSteps()) {
-            for (ProductStepKeyprocess psk: ps.getProductStepKeyprocesses()) {
+        for (ProductStep ps : product.getProductSteps()) {
+            for (ProductStepKeyprocess psk : ps.getProductStepKeyprocesses()) {
                 if (psk.getIsBottleneck()) {
                     productStepKeyprocesses.add(psk);
                 }
@@ -106,7 +111,7 @@ public class ReportController {
                     prevEnterpriseName = enterpriseName;
                 }
 
-                List<String> equipmentNames = Arrays.asList((String[]) tuple.get("equipment_names"));
+                String[] equipmentNames = (String[]) tuple.get("equipment_names");
 
                 StringBuilder equipmentNamesBuilder = new StringBuilder();
                 for (String equipmentName : equipmentNames) {
@@ -212,12 +217,12 @@ public class ReportController {
                     row.createCell(productMap.get(product)).setCellValue(enterpriseProductVolume.getPlanned());
                 }
             }
-       
+
             // Resize the columns to fit the data
             for (int i = 0; i < productColNum; i++) {
                 sheet.autoSizeColumn(i);
             }
-            
+
 
             // Write the workbook to a ByteArrayOutputStream
             ByteArrayOutputStream out = new ByteArrayOutputStream();

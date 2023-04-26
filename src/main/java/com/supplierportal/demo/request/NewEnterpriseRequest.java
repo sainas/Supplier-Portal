@@ -1,6 +1,5 @@
 package com.supplierportal.demo.request;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.Value;
 
 

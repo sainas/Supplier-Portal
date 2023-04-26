@@ -7,7 +7,10 @@ import com.supplierportal.demo.repository.EquipmentRepository;
 import com.supplierportal.demo.repository.ProductStepKeyprocessRepository;
 import com.supplierportal.demo.request.NewKeyprocessEquipmentRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +37,7 @@ public class EnterpriseKeyprocessEquipmentController {
         this.equipmentRepository = equipmentRepository;
         this.enterpriseRepository = enterpriseRepository;
     }
+
     @PostMapping("/enterprise/{enterpriseId}/keyprocess")
     private ResponseEntity<String> createKeyprocess(
             @PathVariable Integer enterpriseId,

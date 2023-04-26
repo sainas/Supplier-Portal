@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+
 @Entity
 @Table(name = "enterprise_product_volume", uniqueConstraints = {
         @UniqueConstraint(columnNames = {
-                "enterprise_id", "product_id", "year" })
+                "enterprise_id", "product_id", "year"})
 })
 @Getter
 @Setter

@@ -1,7 +1,9 @@
 package com.supplierportal.demo.request;
 
-import com.supplierportal.demo.model.EmployeeType;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter

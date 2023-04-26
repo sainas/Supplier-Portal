@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "product_step_keyprocess", uniqueConstraints = {
-        @UniqueConstraint(columnNames = { "product_step_id", "keyprocess_id" })
+        @UniqueConstraint(columnNames = {"product_step_id", "keyprocess_id"})
 })
 public class ProductStepKeyprocess {
 

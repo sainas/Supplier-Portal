@@ -4,11 +4,9 @@ import com.supplierportal.demo.model.Enterprise;
 import com.supplierportal.demo.model.Factory;
 import com.supplierportal.demo.repository.EnterpriseRepository;
 import com.supplierportal.demo.repository.FactoryRepository;
-import com.supplierportal.demo.request.NewFactoryRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -31,7 +29,6 @@ public class FactoryController {
         }
         return ResponseEntity.ok(factoryOptional.get());
     }
-
 
 
     @PostMapping("/enterprise/{enterpriseId}/factory")
